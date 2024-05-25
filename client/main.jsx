@@ -5,13 +5,12 @@ import { Meteor } from 'meteor/meteor'
 
 import { App } from '/imports/ui/App'
 import { WodPage } from '../imports/ui/pages/wods'
+import { ScoresPage } from '../imports/ui/pages/scores'
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />
-  },
-  { path: '/wods/:wodId', element: <WodPage /> }
+  { path: '/', element: <App /> },
+  { path: '/wods/:wodId', element: <WodPage /> },
+  { path: '/scores/:scoreId', element: <ScoresPage /> }
 ])
 
 Meteor.startup(() => {

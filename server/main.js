@@ -1,4 +1,6 @@
 import { Meteor } from 'meteor/meteor'
+import { check } from 'meteor/check'
+
 import { CompetitionsCollection } from '/imports/api/competitions'
 
 const insertCompetition = async payload => {
@@ -28,4 +30,38 @@ Meteor.startup(async () => {
   Meteor.publish('competitions', () =>
     CompetitionsCollection.find({ _id: 'TS4C4ZXD4vzrJsym5' })
   )
+
+  Meteor.methods({
+    'scores.inc'(scoreId) {
+      check(scoreId, String)
+
+      CompetitionsCollection.update(
+        { 'wods.scores._id': scoreId },
+        {
+          $inc: {
+            'wods.$[].scores.$[score].value': 1
+          }
+        },
+        {
+          arrayFilters: [{ 'score._id': scoreId }]
+        }
+      )
+    },
+
+    'scores.dec'(scoreId) {
+      check(scoreId, String)
+
+      CompetitionsCollection.update(
+        { 'wods.scores._id': scoreId },
+        {
+          $inc: {
+            'wods.$[].scores.$[score].value': -1
+          }
+        },
+        {
+          arrayFilters: [{ 'score._id': scoreId }]
+        }
+      )
+    }
+  })
 })
