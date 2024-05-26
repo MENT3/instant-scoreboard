@@ -85,8 +85,6 @@ Meteor.startup(async () => {
     'scores.inc'(scoreId) {
       check(scoreId, String)
 
-      console.log(scoreId)
-
       WodsCollection.update(
         { 'scores._id': scoreId },
         {
@@ -102,8 +100,6 @@ Meteor.startup(async () => {
 
     'scores.dec'(scoreId) {
       check(scoreId, String)
-
-      console.log(scoreId)
 
       WodsCollection.update(
         { 'scores._id': scoreId },
