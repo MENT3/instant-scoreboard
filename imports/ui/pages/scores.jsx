@@ -12,9 +12,9 @@ export const ScoresPage = () => {
   const wod = useFind(
     () => CompetitionsCollection.find({ 'wods.scores._id': scoreId }),
     []
-  )[0]?.wods?.filter(w => w.scores.map(s => s._id)?.includes(scoreId))[0]
+  )[0]?.wods?.find(w => w.scores.map(s => s._id)?.includes(scoreId))
 
-  const score = wod?.scores.filter(s => s._id)[0]
+  const score = wod?.scores.find(s => s._id === scoreId)
 
   if (isLoading()) {
     return (
