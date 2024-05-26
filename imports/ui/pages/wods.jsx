@@ -25,10 +25,10 @@ export const WodPage = () => {
 
       <div className="flex flex-col gap-2">
         {wod?.scores?.map(s => (
-          <>
+          <div key={s._id}>
             <div>Value ➡️ {s.value}</div>
             <div>{JSON.stringify(s)}</div>
-          </>
+          </div>
         ))}
       </div>
 
