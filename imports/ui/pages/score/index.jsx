@@ -20,6 +20,12 @@ export const ScorePage = () => {
     return null
   }, [wodId, isLoading()])
 
+  // TODO Store it instead of compute it
+  const wodMaxReps = wod?.rounds?.reduce(
+    (acc, curr) => acc + curr.reduce((accc, currr) => accc + currr.noRep, 0),
+    0
+  )
+
   if (isLoading()) {
     return (
       <div className="max-w-3xl min-h-screen mx-auto sm:pt-10">Loading..</div>
@@ -39,7 +45,10 @@ export const ScorePage = () => {
       <h1 className="mb-4 text-lg font-medium">Wod page</h1>
       <Wod wod={wod} score={wod.scores[0].value} />
 
-      <Actions scoreId={wod.scores[0]._id} />
+      <Actions
+        scoreId={wod.scores[0]._id}
+        finished={wod.scores[0].value >= wodMaxReps}
+      />
     </div>
   )
 }
