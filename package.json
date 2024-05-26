@@ -1,5 +1,5 @@
 {
-  "name": "instant_score",
+  "name": "instant-scoreboard",
   "private": true,
   "scripts": {
     "start": "meteor run",

@@ -1,9 +1,9 @@
 import assert from 'assert'
 
-describe('instant_score', function () {
+describe('instant-scoreboard', function () {
   it('package.json has correct name', async function () {
     const { name } = await import('../package.json')
-    assert.strictEqual(name, 'instant_score')
+    assert.strictEqual(name, 'instant-scoreboard')
   })
 
   if (Meteor.isClient) {
