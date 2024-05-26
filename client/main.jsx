@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Meteor } from 'meteor/meteor'
 
 import { App } from '/imports/ui/App'
-import { WodPage } from '../imports/ui/pages/wods'
+import { WodPage } from '../imports/ui/pages/wod'
 import { ScoresPage } from '../imports/ui/pages/scores'
 
 const router = createBrowserRouter([

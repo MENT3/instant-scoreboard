@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { useParams } from 'react-router-dom'
 import { useSubscribe, useFind } from 'meteor/react-meteor-data'
 
-import { CompetitionsCollection } from '../../api/competitions.js'
+import { CompetitionsCollection } from '../../api/collections.js'
 
 export const ScoresPage = () => {
   const { scoreId } = useParams()

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFind, useSubscribe } from 'meteor/react-meteor-data'
 
-import { CompetitionsCollection } from '../api/competitions.js'
+import { CompetitionsCollection } from '../api/collections.js'
 import { Wods } from './components/wods.jsx'
 
 export const App = () => {
