@@ -1,5 +1,4 @@
 import React from 'react'
-import { Meteor } from 'meteor/meteor'
 import { useParams } from 'react-router-dom'
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data'
 

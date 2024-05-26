@@ -62,9 +62,9 @@ Meteor.startup(async () => {
     })
   }
 
-  Meteor.publish('competitions', () => CompetitionsCollection.find())
+  Meteor.publish('wod-by-id', wodId => WodsCollection.find({ _id: wodId }))
 
-  Meteor.publish('wod-by-id-with-score', function (wodId, scoreId) {
+  Meteor.publish('wod-by-id-with-score', (wodId, scoreId) => {
     check(wodId, String)
     check(scoreId, String)
 
