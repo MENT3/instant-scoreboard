@@ -15,7 +15,11 @@ export const Wod = ({ wod, score }) => {
 
   return (
     <div>
-      <h4>{wod.name}</h4>
+      <h1 className="mb-4 flex items-center gap-1">
+        <span className="text-lg font-medium">{wod.name}</span>
+        <span>-</span>
+        <span>{wod?.scores[0].athlete?.name}</span>
+      </h1>
 
       <Rounds rounds={wod.rounds} progress={progress} />
     </div>

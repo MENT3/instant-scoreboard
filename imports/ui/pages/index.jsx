@@ -40,8 +40,7 @@ export const ScorePage = () => {
   }
 
   return (
-    <div className="max-w-3xl min-h-screen mx-auto sm:pt-10">
-      <h1 className="mb-4 text-lg font-medium">Wod page</h1>
+    <div className="max-w-3xl min-h-screen mx-auto sm:pt-10 p-4">
       <Wod wod={wod} score={wod.scores[0].value} />
 
       <Actions
