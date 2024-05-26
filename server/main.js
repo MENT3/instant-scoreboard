@@ -64,46 +64,34 @@ Meteor.startup(async () => {
 
   Meteor.publish('competitions', () => CompetitionsCollection.find())
 
-  Meteor.publish('wod-by-id-with-score', function ({ wodId, scoreId }) {
+  Meteor.publish('wod-by-id-with-score', function (wodId, scoreId) {
     check(wodId, String)
     check(scoreId, String)
 
-    const pipeline = [
-      { $match: { _id: wodId } },
-      { $unwind: '$scores' },
-      { $match: { 'scores._id': scoreId } },
+    return WodsCollection.find(
+      { _id: wodId, 'scores._id': scoreId },
       {
-        $group: {
-          _id: '$_id',
-          name: { $first: '$name' },
-          rounds: { $first: '$rounds' },
-          score: { $first: '$scores' }
+        fields: {
+          _id: 1,
+          name: 1,
+          rounds: 1,
+          scores: { $elemMatch: { _id: scoreId } }
         }
       }
-    ]
-
-    const cursor = WodsCollection.rawCollection().aggregate(pipeline)
-    cursor.toArray((err, res) => {
-      if (err) {
-        console.error('Aggregation error:', err)
-        this.ready()
-        return
-      }
-
-      if (res.length > 0) res.forEach(doc => this.added('wods', doc._id, doc))
-      this.ready()
-    })
+    )
   })
 
   Meteor.methods({
     'scores.inc'(scoreId) {
       check(scoreId, String)
 
-      CompetitionsCollection.update(
-        { 'wods.scores._id': scoreId },
+      console.log(scoreId)
+
+      WodsCollection.update(
+        { 'scores._id': scoreId },
         {
           $inc: {
-            'wods.$[].scores.$[score].value': 1
+            'scores.$[score].value': 1
           }
         },
         {
@@ -115,11 +103,13 @@ Meteor.startup(async () => {
     'scores.dec'(scoreId) {
       check(scoreId, String)
 
-      CompetitionsCollection.update(
-        { 'wods.scores._id': scoreId },
+      console.log(scoreId)
+
+      WodsCollection.update(
+        { 'scores._id': scoreId },
         {
           $inc: {
-            'wods.$[].scores.$[score].value': -1
+            'scores.$[score].value': -1
           }
         },
         {

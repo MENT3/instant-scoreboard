@@ -1,15 +1,17 @@
 import React from 'react'
+import { Meteor } from 'meteor/meteor'
 import { useParams } from 'react-router-dom'
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data'
 
 import { WodsCollection } from '../../../api/collections.js'
 
 import { Wod } from './components/wod'
+import { Actions } from './components/actions'
 
 export const ScorePage = () => {
   const { wodId, scoreId } = useParams()
 
-  const isLoading = useSubscribe('wod-by-id-with-score', { wodId, scoreId })
+  const isLoading = useSubscribe('wod-by-id-with-score', wodId, scoreId)
 
   const wod = useTracker(() => {
     if (!isLoading()) {
@@ -35,14 +37,9 @@ export const ScorePage = () => {
   return (
     <div className="max-w-3xl min-h-screen mx-auto sm:pt-10">
       <h1 className="mb-4 text-lg font-medium">Wod page</h1>
+      <Wod wod={wod} score={wod.scores[0].value} />
 
-      <Wod wod={wod} score={23} />
-
-      <br />
-      <br />
-      <br />
-
-      <div>{JSON.stringify(wod)}</div>
+      <Actions scoreId={wod.scores[0]._id} />
     </div>
   )
 }

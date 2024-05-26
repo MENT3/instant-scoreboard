@@ -9,7 +9,7 @@ const Round = ({ movements, progress }) => (
             {m.noRep} - {m.movementName}
             <div className="w-full h-full bg-blue-50 border border-blue-100 rounded">
               <div
-                className="h-4 bg-gradient-to-r from-blue-500 to-blue-400  rounded"
+                className="h-4 bg-gradient-to-r from-blue-500 to-blue-400 rounded"
                 style={{ width: `${(progress[i] * 100) / m.noRep}%` }}
               />
             </div>
