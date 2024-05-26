@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Meteor } from 'meteor/meteor'
 
 import { App } from '/imports/ui/App'
-import { ScorePage } from '../imports/ui/pages/score'
-import { WodPage } from '../imports/ui/pages/score/wod'
+import { ScorePage } from '../imports/ui/pages'
+import { WodPage } from '../imports/ui/pages/wod'
 
 const router = createBrowserRouter([
   { path: '/', element: <App /> },

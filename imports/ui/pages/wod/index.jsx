@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data'
 
-import { WodsCollection } from '../../../../api/collections.js'
+import { WodsCollection } from '../../../api/collections.js'
 
 import { Leaderboard } from './components/leaderboard.jsx'
 
