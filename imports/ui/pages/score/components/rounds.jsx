@@ -1,9 +1,7 @@
 import React from 'react'
 
-export const Round = ({ movements, progress }) => (
+const Round = ({ movements, progress }) => (
   <div className="my-2 rounded-lg border p-4">
-    <h4>this is a round</h4>
-
     <ul className="space-y-2">
       {movements?.map((m, i) => (
         <li key={i} className="w-full">
@@ -21,3 +19,6 @@ export const Round = ({ movements, progress }) => (
     </ul>
   </div>
 )
+
+export const Rounds = ({ rounds, progress }) =>
+  rounds.map((r, i) => <Round key={i} movements={r} progress={progress[i]} />)

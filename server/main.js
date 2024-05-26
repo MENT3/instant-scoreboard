@@ -1,5 +1,5 @@
-import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
+import { Meteor } from 'meteor/meteor'
 
 import {
   CompetitionsCollection,
@@ -50,13 +50,50 @@ Meteor.startup(async () => {
           { noRep: 9, movementName: 'Thuster', type: 'rep' },
           { noRep: 9, movementName: 'Chest to bar', type: 'rep' }
         ]
+      ],
+      scores: [
+        {
+          _id: '6652d0ced431ac8ebec115ae',
+          athlete: { name: 'Jules CASTOR' },
+          judge: { name: 'Tristan le juge' },
+          value: 0
+        }
       ]
     })
   }
 
   Meteor.publish('competitions', () => CompetitionsCollection.find())
 
-  Meteor.publish('wodById', id => WodsCollection.find({ _id: id }))
+  Meteor.publish('wod-by-id-with-score', function ({ wodId, scoreId }) {
+    check(wodId, String)
+    check(scoreId, String)
+
+    const pipeline = [
+      { $match: { _id: wodId } },
+      { $unwind: '$scores' },
+      { $match: { 'scores._id': scoreId } },
+      {
+        $group: {
+          _id: '$_id',
+          name: { $first: '$name' },
+          rounds: { $first: '$rounds' },
+          score: { $first: '$scores' }
+        }
+      }
+    ]
+
+    const cursor = WodsCollection.rawCollection().aggregate(pipeline)
+    cursor.toArray((err, res) => {
+      if (err) {
+        console.error('Aggregation error:', err)
+        this.ready()
+        return
+      }
+
+      if (res.length > 0) res.forEach(doc => this.added('wods', doc._id, doc))
+      this.ready()
+    })
+  })
 
   Meteor.methods({
     'scores.inc'(scoreId) {

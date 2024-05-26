@@ -4,13 +4,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Meteor } from 'meteor/meteor'
 
 import { App } from '/imports/ui/App'
-import { WodPage } from '../imports/ui/pages/wod'
-import { ScoresPage } from '../imports/ui/pages/scores'
+import { ScorePage } from '../imports/ui/pages/score'
 
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
-  { path: '/wods/:wodId', element: <WodPage /> },
-  { path: '/scores/:scoreId', element: <ScoresPage /> }
+  { path: '/wods/:wodId/scores/:scoreId', element: <ScorePage /> }
 ])
 
 Meteor.startup(() => {

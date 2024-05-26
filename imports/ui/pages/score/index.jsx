@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom'
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data'
 
 import { WodsCollection } from '../../../api/collections.js'
+
 import { Wod } from './components/wod'
 
-export const WodPage = () => {
-  const { wodId } = useParams()
+export const ScorePage = () => {
+  const { wodId, scoreId } = useParams()
 
-  const isLoading = useSubscribe('wodById', wodId)
+  const isLoading = useSubscribe('wod-by-id-with-score', { wodId, scoreId })
 
   const wod = useTracker(() => {
     if (!isLoading()) {
