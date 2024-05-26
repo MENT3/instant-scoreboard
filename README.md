@@ -10,7 +10,7 @@ A small MeteorJS project writted in a few hours, that allow me to re-use it. It 
 
 ## Demo
 
-![gif demo](https://i.imgur.com/yourgiflink.gif)https://raw.githubusercontent.com/MENT3/instant-scoreboard/main/docs/demo.gif
+<img src="https://raw.githubusercontent.com/MENT3/instant-scoreboard/main/docs/demo.gif" alt="gif">
 
 ## Next steps
 
