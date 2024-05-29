@@ -1,39 +1,13 @@
 import { check } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
 
-import {
-  CompetitionsCollection,
-  WodsCollection
-} from '/imports/api/collections'
-
-const insertCompetition = async payload => {
-  await CompetitionsCollection.insertAsync(payload)
-}
+import { WodsCollection } from '/imports/api/collections'
 
 const insertWod = async payload => {
   await WodsCollection.insertAsync(payload)
 }
 
 Meteor.startup(async () => {
-  // If the Links collection is empty, add some data.
-  if ((await CompetitionsCollection.find().countAsync()) === 0) {
-    await insertCompetition({
-      name: 'Affiliates',
-      wods: [
-        {
-          description: '21-15-9 Thrusters',
-          scores: [
-            {
-              athlete: { name: 'Jules Castor' },
-              judge: { name: 'Tristan le judge' },
-              value: 43
-            }
-          ]
-        }
-      ]
-    })
-  }
-
   if ((await WodsCollection.find().countAsync()) === 0) {
     await insertWod({
       name: 'Fran',
