@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Meteor } from 'meteor/meteor'
 
-import { ScorePage } from '../imports/ui/pages'
+import { ScorePage } from '../imports/ui/pages/score'
 import { WodPage } from '../imports/ui/pages/wod'
 
 const router = createBrowserRouter([

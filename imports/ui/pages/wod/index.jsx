@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data'
 
-import { WodsCollection } from '../../../api/collections.js'
+import { WodsCollection } from '../../../api/wods/collections.js'
 
 import { Leaderboard } from './components/leaderboard.jsx'
 
@@ -10,12 +10,10 @@ export const WodPage = () => {
   const { wodId } = useParams()
 
   const isLoading = useSubscribe('wod-by-id', wodId)
-  const wod = useTracker(() => {
-    if (!isLoading()) {
-      return WodsCollection.findOne({ _id: wodId })
-    }
-    return null
-  }, [wodId, isLoading()])
+  const wod = useTracker(
+    () => (isLoading() ? null : WodsCollection.findOne({ _id: wodId })),
+    [wodId, isLoading()]
+  )
 
   if (isLoading()) {
     return (

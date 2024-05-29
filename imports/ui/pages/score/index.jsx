@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data'
 
-import { WodsCollection } from '../../api/collections.js'
+import { WodsCollection } from '../../../api/wods/collections.js'
 
 import { Wod } from './components/wod'
 import { Actions } from './components/actions'
@@ -12,12 +12,10 @@ export const ScorePage = () => {
 
   const isLoading = useSubscribe('wod-by-id-with-score', wodId, scoreId)
 
-  const wod = useTracker(() => {
-    if (!isLoading()) {
-      return WodsCollection.findOne({ _id: wodId })
-    }
-    return null
-  }, [wodId, isLoading()])
+  const wod = useTracker(
+    () => (isLoading() ? null : WodsCollection.findOne({ _id: wodId })),
+    [wodId, isLoading()]
+  )
 
   // TODO Store it instead of compute it
   const wodMaxReps = wod?.rounds?.reduce(
